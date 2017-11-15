@@ -14,3 +14,15 @@
 #title {
   text-align: center;
 }
+
+.hide {
+  display: flex;
+  height: 70px;
+  justify-content: center;
+  align-items: center;
+}
+
+#resetButton {
+  display: flex;
+  justify-content: center;
+}
