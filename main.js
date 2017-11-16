@@ -23,25 +23,29 @@ $('.hide').hide()
 
 $cards.on('click', function() {
   var card = $(this).children()
-  card.show()
-  if (toggle === 0){
-    firstVal = card.text()
-    $firstCard = card
-    toggle++
-  } else {
-    secondVal = card.text()
-    $secondCard = card
-    toggle--
+  if (card.hasClass('hide')) {
+    card.show()
+    card.toggleClass('hide show')
+    if (toggle === 0){
+      firstVal = card.text()
+      $firstCard = card
+      toggle++
+    } else {
+      secondVal = card.text()
+      $secondCard = card
+      toggle--
+    }
+    if ((toggle === 0) && (firstVal != secondVal)) {
+      setTimeout(function(){
+        $($firstCard).hide();
+        $($firstCard).toggleClass('hide show');
+        $($secondCard).hide();
+        $($secondCard).toggleClass('hide show');
+      }, 500)
+    } else if (toggle === 0 && firstVal == secondVal) {
+      matches++
+    }
   }
-  if ((toggle === 0) && (firstVal != secondVal)) {
-    setTimeout(function(){
-      $($firstCard).hide();
-      $($secondCard).hide();
-    }, 500)
-  } else if (toggle === 0 && firstVal == secondVal) {
-    matches++
-  }
-
   if (matches === 8) {
     $(title).text('YOU WIN')
     $($resetButton).show()
