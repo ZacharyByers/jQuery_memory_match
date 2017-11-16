@@ -3,40 +3,40 @@ var values = ["\u{2764}", "\u{2764}", "\u{2747}", "\u{2747}", "\u{26C4}", "\u{26
 
 var firstVal, secondVal;
 
-var firstCard, secondCard;
+var $firstCard, $secondCard;
 
 var matches = 0;
 
 var toggle = 0
 
-var cards = $('.card')
+var $cards = $('.card')
 
-var resetButton = $('#restart')
+var $resetButton = $('#restart')
 
-$(resetButton).hide()
+$($resetButton).hide()
 
-$.each(cards, function(index, card) {
+$.each($cards, function(index, card) {
   $(card).append("<p class = 'hide' id = '" + index + "'" + " >" + values.splice(Math.floor(Math.random() * values.length), 1) + "</p>")
 })
 
 $('.hide').hide()
 
-cards.on('click', function() {
+$cards.on('click', function() {
   var card = $(this).children()
   card.show()
   if (toggle === 0){
     firstVal = card.text()
-    firstCard = card
+    $firstCard = card
     toggle++
   } else {
     secondVal = card.text()
-    secondCard = card
+    $secondCard = card
     toggle--
   }
   if ((toggle === 0) && (firstVal != secondVal)) {
     setTimeout(function(){
-      $(firstCard).hide();
-      $(secondCard).hide();
+      $($firstCard).hide();
+      $($secondCard).hide();
     }, 500)
   } else if (toggle === 0 && firstVal == secondVal) {
     matches++
@@ -44,10 +44,10 @@ cards.on('click', function() {
 
   if (matches === 8) {
     $(title).text('YOU WIN')
-    $(resetButton).show()
+    $($resetButton).show()
   }
 })
 
-resetButton.on('click', function() {
+$resetButton.on('click', function() {
   location.reload()
 })
